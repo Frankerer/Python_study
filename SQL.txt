@@ -1,0 +1,101 @@
+show databases;
+-- 展示数据库
+
+use world;
+# 使用数据库
+
+select database();
+# 显示当前使用的数据库
+
+create database test01 charset UTF8;
+/*
+创建数据库
+ */
+
+drop database test01;
+# 删除数据库
+
+use test;
+
+select database();
+
+show tables;
+
+create table stu(
+	id int,
+	money float,
+	name varchar(10)
+	#timestamp 时间戳类型
+)
+
+create table stu01(
+	id int,
+	money float,
+	brithday date,
+	name varchar(10)
+	#timestamp 时间戳类型
+)
+
+drop table stu ;
+
+#drop table stu if exists stu;
+
+#插入数据
+insert  into
+stu (id,money,name)
+values(1001,123.12,"wang"),(1002,5646.16,"zhang")
+
+insert  into
+stu
+values (1003,1236.112,"liu"),(1004,236.12,"zhao")
+
+select  * from stu
+
+#删除数据
+delete from stu where name = 'liu' ;
+
+delete from stu where money >= 1000 ;
+
+#删除所有数据
+delete from stu ;
+
+#更新操作
+update
+stu
+set name = "guan" where id = 1003;
+
+
+update
+stu
+set money = 100;
+
+#查询操作
+select * from stu;
+
+select * from stu where id >1004
+
+select id,count(money) from stu group by id
+#select里一定只有除了聚合函数外的group by 规定的元素
+
+select id,sum(money) from stu group by id  order by sum(money) asc #desc 降序
+
+select id,sum(money) from stu group by id  order by sum(money) asc limit 2，3#从第二条开始显示3条记录
+
+/*
+ select 列|聚合函数|* from 表
+ where...
+ group by...
+ order by ...[asc|desc]
+ limit n[,m]
+
+ 执行顺序为，通过*from锁定表，后通过*where去过滤，后通过*group by去分组，后跑*聚合函数，后展示选择展示的*列，后跑*order by，最后跑*limit
+
+   */
+
+
+
+
+
+
+
+
